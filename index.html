@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -494,7 +493,7 @@
       {
         Producto: "patas largas color beige con bufanda",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/lwa9x0rcbsbeqoaw25vkm/patas-largas-color-beige-con-bufanda.jpg?rlkey=xlzhtrsnrupx78mavsyf5e0yh&st=rvlmqjxs&dl=1",
-        PrecioNum: 5000,
+        Precio: "$5.000",
         Descripcion: "Dale vida a tu decoración con este simpático muñeco navideño de patas largas (60 cm). Ideal para complementar tu ambiente festivo con un toque de ternura y alegría."
       },
       {
@@ -570,7 +569,7 @@
       {
         Producto: "Colgante 01",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/ba6vu9ixnwuiu0gcuisux/Colgante-01.jpg?rlkey=gcull6ljwp5rx331boa6ltykq&st=lfc8l0px&dl=1",
-        Precio: "$4.000",
+        PrecioNum: 4000,
         Descripcion: "Colgante decorativos con detalles navideños. Ideales para dar un toque elegante y colorido a tu decoración de Navidad."
         },
       {
@@ -588,7 +587,7 @@
       {
         Producto: "Esfera 03",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/f6q7xxxzp6xabwcatpueb/esfera-03.jpg?rlkey=cvw1jeo9tnxty25y90vw4uyat&st=rxpmfnio&dl=1",
-        PrecioNum: 2500,
+        Precio: "$2.500",
         Descripcion: "Esfera navideña decorativa con figura de Papá Noel y base roja con detalles dorados.Al agitarla, la nieve crea un efecto mágico ideal para complementar cualquier rincón festivo."
         },
       {
@@ -624,7 +623,7 @@
       /*{
         Producto: "Tren color verde con rojo",
         Imagen: "https://dl.dropboxusercontent.com/scl/fi/upqjns6l8nftkx6znlmk5/Tren-color-verde-con-rojo.jpg?rlkey=rynblogmq0yr6z63j5zi3jev9&st=76azhu46&dl=1",
-        PrecioNum: 5000,
+        Precio: "$5.000",
         Descripcion: "Tren navideño decorativo de 20 cm en tonos verde y rojo, con figuras de Papá Noel y adornos festivos."
         },*/
       /*{
@@ -664,6 +663,11 @@
     let carrito = {};
     let descripcionVisible = [];
 
+    // Función para formatear precios en formato chileno
+    function formatearPrecio(numero) {
+      return numero.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
     function renderProductos() {
       const contenedor = document.getElementById("productos");
       contenedor.innerHTML = "";
@@ -676,7 +680,7 @@
           <div class="producto">
             <img src="${p.Imagen}" alt="${p.Producto}">
             <h3>${p.Producto}</h3>
-            <p class="precio">$${p.Precio.toLocaleString('es-CL')}</p>
+            <p class="precio">${formatearPrecio(p.PrecioNum)}</p>
             ${p.Descripcion ? `<button class="btn-ver" onclick="toggleDescripcion(${i})">${mostrarDescripcion ? "Cerrar Descripción" : "Ver Descripción"}</button>` : ""}
             ${mostrarDescripcion && p.Descripcion ? `<p class="descripcion">${p.Descripcion}</p>` : ""}
             
@@ -750,7 +754,7 @@
     function calcularTotal() {
       let total = 0;
       for (let i in carrito) {
-        total += productos[i].Precio * carrito[i];
+        total += productos[i].PrecioNum * carrito[i];
       }
       return total;
     }
@@ -769,14 +773,14 @@
       items.forEach(i => {
         const prod = productos[i];
         const cant = carrito[i];
-        const subtotal = prod.Precio * cant;
+        const subtotal = prod.PrecioNum * cant;
         
         texto += `
           <div class="resumen-item">
             <span class="resumen-producto">${prod.Producto}</span>
             <br>
-            <span class="resumen-cantidad">${cant}x $${prod.Precio.toLocaleString('es-CL')}</span>
-            <span class="resumen-subtotal">$${subtotal.toLocaleString('es-CL')}</span>
+            <span class="resumen-cantidad">${cant}x ${formatearPrecio(prod.PrecioNum)}</span>
+            <span class="resumen-subtotal">${formatearPrecio(subtotal)}</span>
           </div>
         `;
       });
@@ -784,7 +788,7 @@
       const total = calcularTotal();
       texto += `
         <div class="total-final">
-          TOTAL: $${total.toLocaleString('es-CL')}
+          TOTAL: ${formatearPrecio(total)}
         </div>
         <p>Por favor ingresa tu nombre para continuar:</p>
         <input id='nombreCliente' type='text' class='nombre-input' placeholder='Tu nombre aquí'>
@@ -808,12 +812,12 @@
       for (let i in carrito) {
         const prod = productos[i];
         const cant = carrito[i];
-        const subtotal = prod.Precio * cant;
-        mensaje += `• ${cant}x ${prod.Producto} = $${subtotal.toLocaleString('es-CL')}\n`;
+        const subtotal = prod.PrecioNum * cant;
+        mensaje += `• ${cant}x ${prod.Producto} = ${formatearPrecio(subtotal)}\n`;
       }
       
       const total = calcularTotal();
-      mensaje += `\n💰 TOTAL: $${total.toLocaleString('es-CL')}`;
+      mensaje += `\n💰 TOTAL: ${formatearPrecio(total)}`;
       
       const url = "https://wa.me/56973500652?text=" + encodeURIComponent(mensaje);
       window.open(url, "_blank");
@@ -834,30 +838,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
