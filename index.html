@@ -18,17 +18,25 @@
     header {
       background-color: #FFEDE3;
       padding: 20px 10px 10px 10px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     h1 {
       font-size: 2em;
       color: #B22222;
+      margin: 0;
     }
 
     h2 {
       font-weight: normal;
       color: #8B0000;
-      margin-top: -10px;
+      margin: 5px 0 0 0;
+      font-size: 1.1em;
     }
 
     .categorias-container {
@@ -36,10 +44,19 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      padding: 20px;
+      padding: 15px 10px;
       background: linear-gradient(180deg, #fff8f2 0%, #fef2e8 100%);
-      border-bottom: 3px solid #d4af37;
-      margin-bottom: 20px;
+      border-top: 2px solid #d4af37;
+      position: fixed;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    body {
+      padding-top: 200px;
     }
 
     .btn-categoria {
@@ -67,6 +84,39 @@
       border-color: #8B0000;
     }
 
+    /* Botón PROMOCIONES especial */
+    .btn-promociones {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+      color: #B22222 !important;
+      border: 3px solid #FF6B00 !important;
+      font-size: 1.1em !important;
+      animation: pulsarPromo 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6) !important;
+    }
+
+    .btn-promociones:hover {
+      transform: translateY(-5px) scale(1.05) !important;
+      box-shadow: 0 8px 25px rgba(255, 107, 0, 0.5) !important;
+    }
+
+    .btn-promociones.activo {
+      background: linear-gradient(135deg, #FF6B00 0%, #FF4500 100%) !important;
+      color: white !important;
+      border-color: #FF0000 !important;
+      animation: none;
+    }
+
+    @keyframes pulsarPromo {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      }
+      50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
+      }
+    }
+
     .btn-categoria .emoji {
       font-size: 1.3em;
       margin-right: 5px;
@@ -75,17 +125,62 @@
     .categoria-info {
       background: white;
       padding: 15px;
-      margin: 0 20px 20px 20px;
+      margin: 20px 20px;
       border-radius: 10px;
       border-left: 5px solid #d4af37;
       color: #5A1E1E;
       font-size: 1.1em;
     }
 
-    .no-productos {
-      padding: 60px 20px;
-      color: #666;
+    .mensaje-proximamente {
+      background: linear-gradient(135deg, #fff8f2 0%, #ffe8d6 100%);
+      border: 3px dashed #d4af37;
+      border-radius: 15px;
+      padding: 50px 30px;
+      margin: 40px auto;
+      max-width: 600px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      animation: pulsar 2s ease-in-out infinite;
+    }
+
+    @keyframes pulsar {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .mensaje-proximamente .icono {
+      font-size: 4em;
+      margin-bottom: 20px;
+      animation: girar 3s linear infinite;
+    }
+
+    @keyframes girar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .mensaje-proximamente h3 {
+      color: #B22222;
+      font-size: 1.8em;
+      margin: 20px 0;
+    }
+
+    .mensaje-proximamente p {
+      color: #5A1E1E;
       font-size: 1.2em;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    .mensaje-proximamente .destacado {
+      background: #d4af37;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 1.1em;
     }
 
     .productos-container {
@@ -342,98 +437,108 @@
       background-color: #d35400 !important;
     }
 
-    @media (max-width: 600px) {
-      .producto {
-        width: 90%;
-      }
-      .producto img {
-        height: auto;
-        object-fit: contain;
-        background-color: #fff;
-        padding: 8px;
-      }
+    .btn-carrito-fijo {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #B22222;
+      color: white;
+      border: 3px solid #8B0000;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.8em;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(178, 34, 34, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
 
+    .btn-carrito-fijo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(178, 34, 34, 0.6);
+    }
+
+    #contadorCarritoFijo {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #FFD700;
+      color: #B22222;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      font-size: 0.5em;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    @media (max-width: 768px) {
       header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: linear-gradient(90deg, #fff8f2, #fef2e8);
-        border-bottom: 2px solid #d4af37;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-        padding: 12px;
+        padding: 10px;
       }
 
-      body {
-        margin-top: 120px;
-      }
-
-      header h1 {
-        font-size: 1.5em;
-      }
-
-      header h2 {
-        font-size: 1em;
-        margin-bottom: 8px;
-      }
-
-      .btn-carrito {
-        background-color: #ffffff;
-        color: #b22222;
-        border: 2px solid #fff;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
+      h1 {
         font-size: 1.4em;
-        cursor: pointer;
-        position: absolute;
-        top: 18px;
-        right: 25px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
       }
 
-      .btn-carrito:hover {
-        transform: scale(1.08);
-        background-color: #ffffff;
-      }
-
-      .btn-carrito:active,
-      .btn-carrito:focus {
-        background-color: #ffffff;
-        color: #b22222;
-        outline: none;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      }
-
-      #contadorCarrito {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background-color: #27ae60;
-        color: white;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 0.8em;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid white;
-      }
-
-      .btn-categoria {
+      h2 {
         font-size: 0.9em;
-        padding: 10px 15px;
       }
 
       .categorias-container {
-        padding: 15px 10px;
+        top: 80px;
+        padding: 10px 5px;
+        gap: 8px;
+      }
+
+      body {
+        padding-top: 180px;
+      }
+
+      .btn-categoria {
+        font-size: 0.85em;
+        padding: 10px 12px;
+      }
+
+      .btn-promociones {
+        font-size: 0.95em !important;
+      }
+
+      .producto {
+        width: 90%;
+      }
+
+      .producto img {
+        height: auto;
+        padding: 8px;
+      }
+
+      .mensaje-proximamente {
+        padding: 30px 20px;
+        margin: 20px 15px;
+      }
+
+      .mensaje-proximamente h3 {
+        font-size: 1.4em;
+      }
+
+      .mensaje-proximamente p {
+        font-size: 1em;
+      }
+
+      .btn-carrito-fijo {
+        width: 55px;
+        height: 55px;
+        font-size: 1.5em;
+        bottom: 15px;
+        right: 15px;
       }
     }
   </style>
@@ -443,15 +548,20 @@
   <header>
    <h1>🎁 El Rincón de la Tati</h1>
    <h2>Catálogo de Productos</h2>
-   <button class="btn-carrito" onclick="irAlResumen()">🛒<span id="contadorCarrito">0</span></button>
   </header>
 
   <div class="categorias-container">
     <button class="btn-categoria activo" onclick="filtrarCategoria('todas')" id="btn-todas">
       <span class="emoji">📦</span> Ver Todo
     </button>
+    <button class="btn-categoria btn-promociones" onclick="filtrarCategoria('promociones')" id="btn-promociones">
+      <span class="emoji">🔥</span> PROMOCIONES
+    </button>
     <button class="btn-categoria" onclick="filtrarCategoria('navidad')" id="btn-navidad">
-      <span class="emoji">🎄</span> Regalos Navideños
+      <span class="emoji">🎄</span> Navidad
+    </button>
+    <button class="btn-categoria" onclick="filtrarCategoria('tejido')" id="btn-tejido">
+      <span class="emoji">🧶</span> Tejido
     </button>
     <button class="btn-categoria" onclick="filtrarCategoria('hogar')" id="btn-hogar">
       <span class="emoji">🏠</span> Hogar
@@ -464,11 +574,17 @@
     </button>
   </div>
 
+  <button class="btn-carrito-fijo" onclick="irAlResumen()">
+    🛒
+    <span id="contadorCarritoFijo">0</span>
+  </button>
+
   <div class="categoria-info" id="categoriaInfo"></div>
 
   <main>
+    <div id="mensajeProximamente" style="display: none;"></div>
     <div class="productos-container" id="productos"></div>
-    <p class="ayuda">💡 Consejo: Usa los botones + y - para ajustar las cantidades de cada producto.</p>
+    <p class="ayuda" id="ayudaTexto">💡 Consejo: Usa los botones + y - para ajustar las cantidades de cada producto.</p>
     <div id="resumen"></div>
   </main>
 
@@ -515,7 +631,9 @@
 
     const categoriasInfo = {
       todas: { nombre: "Todos los Productos", emoji: "📦" },
-      navidad: { nombre: "Regalos Navideños", emoji: "🎄" },
+      promociones: { nombre: "Promociones", emoji: "🔥" },
+      navidad: { nombre: "Navidad", emoji: "🎄" },
+      tejido: { nombre: "Tejido", emoji: "🧶" },
       hogar: { nombre: "Hogar", emoji: "🏠" },
       ninos: { nombre: "Niños", emoji: "👶" },
       mujer: { nombre: "Mujer", emoji: "👗" }
@@ -524,7 +642,9 @@
     function filtrarCategoria(categoria) {
       categoriaActual = categoria;
       
-      document.querySelectorAll('.btn-categoria').forEach(btn => btn.classList.remove('activo'));
+      document.querySelectorAll('.btn-categoria').forEach(btn => {
+        btn.classList.remove('activo');
+      });
       document.getElementById('btn-' + categoria).classList.add('activo');
       
       renderProductos();
@@ -538,8 +658,9 @@
       
       if (productosFiltrados.length > 0) {
         infoEl.innerHTML = `${info.emoji} <strong>${info.nombre}</strong> - ${productosFiltrados.length} producto${productosFiltrados.length !== 1 ? 's' : ''} disponible${productosFiltrados.length !== 1 ? 's' : ''}`;
+        infoEl.style.display = 'block';
       } else {
-        infoEl.innerHTML = `${info.emoji} <strong>${info.nombre}</strong> - Próximamente nuevos productos`;
+        infoEl.style.display = 'none';
       }
     }
 
@@ -550,17 +671,80 @@
       return productos.filter(p => p.Categoria === categoriaActual);
     }
 
+    function mostrarMensajeProximamente() {
+      const info = categoriasInfo[categoriaActual];
+      const mensajes = {
+        promociones: {
+          icono: "🔥",
+          titulo: "¡Ofertas Increíbles!",
+          texto: "Estamos preparando las mejores promociones y descuentos especiales para ti.",
+          extra: "Descuentos de hasta 50% en productos seleccionados"
+        },
+        tejido: {
+          icono: "🧶",
+          titulo: "Tejidos Artesanales",
+          texto: "Estamos preparando hermosos productos tejidos a mano con mucho cariño.",
+          extra: "Gorros, bufandas, mantas y más..."
+        },
+        hogar: {
+          icono: "🏠",
+          titulo: "Decoración para el Hogar",
+          texto: "Pronto encontrarás productos únicos para embellecer cada rincón de tu casa.",
+          extra: "¡Grandes sorpresas en camino!"
+        },
+        ninos: {
+          icono: "👶",
+          titulo: "Productos para Niños",
+          texto: "Estamos seleccionando los mejores productos para los más pequeños del hogar.",
+          extra: "Juguetes, ropa y accesorios especiales"
+        },
+        mujer: {
+          icono: "👗",
+          titulo: "Moda y Accesorios para Mujer",
+          texto: "Preparando una colección exclusiva pensada especialmente para ti.",
+          extra: "Accesorios, joyería y más..."
+        }
+      };
+
+      const msg = mensajes[categoriaActual];
+      
+      return `
+        <div class="mensaje-proximamente">
+          <div class="icono">${msg.icono}</div>
+          <h3>${msg.titulo}</h3>
+          <p>${msg.texto}</p>
+          <p style="font-size: 1em; color: #666; margin: 20px 0;">
+            ${msg.extra}
+          </p>
+          <div class="destacado">
+            ⏳ Estamos trabajando para tenerlo listo muy pronto
+          </div>
+          <p style="margin-top: 25px; font-size: 0.95em; color: #888;">
+            💡 Mientras tanto, explora nuestras otras categorías disponibles
+          </p>
+        </div>
+      `;
+    }
+
     function renderProductos() {
       const contenedor = document.getElementById("productos");
+      const mensajeEl = document.getElementById("mensajeProximamente");
+      const ayudaEl = document.getElementById("ayudaTexto");
       const productosFiltrados = obtenerProductosFiltrados();
       
       if (productosFiltrados.length === 0) {
-        contenedor.innerHTML = '<div class="no-productos">No hay productos en esta categoría todavía.<br>¡Vuelve pronto para ver nuestras novedades! 🎁</div>';
+        contenedor.innerHTML = '';
+        mensajeEl.innerHTML = mostrarMensajeProximamente();
+        mensajeEl.style.display = 'block';
+        ayudaEl.style.display = 'none';
         return;
       }
       
+      mensajeEl.style.display = 'none';
+      ayudaEl.style.display = 'block';
       contenedor.innerHTML = "";
-      productosFiltrados.forEach((p, indexOriginal) => {
+      
+      productosFiltrados.forEach((p) => {
         const i = productos.indexOf(p);
         const cantidad = carrito[i] || 0;
         const enCarrito = cantidad > 0;
@@ -718,7 +902,7 @@
     }
 
     function actualizarContador() {
-      const contador = document.getElementById("contadorCarrito");
+      const contador = document.getElementById("contadorCarritoFijo");
       const totalItems = Object.values(carrito).reduce((sum, cant) => sum + cant, 0);
       if (contador) contador.textContent = totalItems;
     }
