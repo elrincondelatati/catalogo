@@ -697,7 +697,7 @@
       
       /*Mujer*/
     /* { Producto: "Botellas de Silicona", Imagen: "https://dl.dropboxusercontent.com/scl/fi/8tqon7n4z1jqgf5fve554/Botellas-de-silicona-plegable.jpg?rlkey=2esf80o5kx738aag66vp9y3va&st=8hli0sn0&dl=1", Precio: 3000, Categoria: "mujer", Descripcion: "Botellas plegables de silicona, disponibles en colores celeste y naranjo. Prácticas, livianas y perfectas para llevar a cualquier lugar." }, */
-       { Producto: "Botellas de Silicona", Imagen: "https://dl.dropboxusercontent.com/scl/fi/aipjstwrpvlu83bfegzcv/Botellas-de-silicona-plegable.JPG?rlkey=ab1sd9qwz76d5zmx7j2xkbe6h&st=r6f7w0q7&dl=1", Precio: 3000, Categoria: "mujer", Descripcion: "Botellas plegables de silicona, disponibles en colores celeste y naranjo. Prácticas, livianas y perfectas para llevar a cualquier lugar." },
+       { Producto: "Botellas de Silicona", Imagen: "https://dl.dropboxusercontent.com/scl/fi/aipjstwrpvlu83bfegzcv/Botellas-de-silicona-plegable.JPG?rlkey=ab1sd9qwz76d5zmx7j2xkbe6h&st=r6f7w0q7&dl=1", Precio: 3000, Agotado: true, Categoria: "mujer", Descripcion: "Botellas plegables de silicona, disponibles en colores celeste y naranjo. Prácticas, livianas y perfectas para llevar a cualquier lugar." },
       
 
       { Producto: "Vaso tipo Starbuck", Imagen: "https://dl.dropboxusercontent.com/scl/fi/galqdgkvgruchocnvd53y/VASO-TIPO-STARBUCK.jpg?rlkey=986x6p5b6f6iapso2utcsq3ws&st=rhlw2fud&dl=1", Precio: 2000, Categoria: "mujer", Descripcion: "Disponible en colores morado, rosado, celeste, fucsia, negro y blanco, perfectos para combinar con cualquier estilo." }
@@ -837,7 +837,10 @@
             <p class="precio">${p.Precio.toLocaleString('es-CL')}</p>
             ${p.Descripcion ? `<button class="btn-ver" onclick="toggleDescripcion(${i})">${mostrarDescripcion ? "Cerrar Descripción" : "Ver Descripción"}</button>` : ""}
             ${mostrarDescripcion && p.Descripcion ? `<p class="descripcion">${p.Descripcion}</p>` : ""}
-            
+
+          ${p.Agotado ? 
+             '<p style="color: #e74c3c; font-weight: bold; margin: 10px 0; background: #ffe6e6; padding: 10px; border-radius: 8px;">PRODUCTO AGOTADO</p>' 
+              :   
             ${!enCarrito ? 
               `<button onclick="agregarAlCarrito(${i})" class="btn-elegir">Elegir</button>` 
               : 
