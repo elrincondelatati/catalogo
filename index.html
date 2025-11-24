@@ -839,9 +839,11 @@
             ${mostrarDescripcion && p.Descripcion ? `<p class="descripcion">${p.Descripcion}</p>` : ""}
 
           ${p.Agotado ? 
-             '<p style="color: #e74c3c; font-weight: bold; margin: 10px 0; background: #ffe6e6; padding: 10px; border-radius: 8px;">PRODUCTO AGOTADO</p>' 
-              :   
-            ${!enCarrito ? 
+           '<p style="color: #e74c3c; font-weight: bold; margin: 10px 0; background: #ffe6e6; padding: 10px; border-radius: 8px;">PRODUCTO AGOTADO</p>' 
+            :   
+           
+           !enCarrito ? 
+             
               `<button onclick="agregarAlCarrito(${i})" class="btn-elegir">Elegir</button>` 
               : 
               `<div class="cantidad-controls">
